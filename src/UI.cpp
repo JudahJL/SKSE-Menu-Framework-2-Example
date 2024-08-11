@@ -16,8 +16,7 @@ void UI::Register() {
 }
 
 void UI::Example1::LookupForm() {
-    auto addForm = RE::TESForm::LookupByID(AddFormId);
-    if (addForm) {
+    if (auto addForm = RE::TESForm::LookupByID(AddFormId); addForm) {
         AddBoundObject = addForm->As<RE::TESBoundObject>();
     } else {
         AddBoundObject = nullptr;
@@ -25,7 +24,7 @@ void UI::Example1::LookupForm() {
 }
 
 void __stdcall UI::Example1::Render() {
-    ImGui::InputScalar("form id", ImGuiDataType_U32, &AddFormId, NULL, NULL, "%08X");
+    ImGui::InputScalar("form id", ImGuiDataType_U32, &AddFormId, nullptr, nullptr, "%08X");
 
     if (ImGui::Button("Search")) {
         LookupForm();
@@ -106,7 +105,7 @@ void __stdcall UI::Example3::Render() {
             for (int column = 0; column < 3; column++) {
                 ImGui::TableSetColumnIndex(column);
                 char buf[32];
-                sprintf(buf, "Hello %d,%d", column, row);
+                sprintf_s(buf, "Hello %d,%d", column, row);
 
                 if (filter->PassFilter(buf)) {
                     FontAwesome::PushSolid();
