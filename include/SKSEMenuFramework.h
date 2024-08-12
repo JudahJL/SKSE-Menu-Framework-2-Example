@@ -9,8 +9,8 @@
 static auto menuFramework = GetModuleHandle(L"SKSEMenuFramework");
 #define MENU_WINDOW SKSEMenuFramework::Model::WindowInterface*
 
-namespace SKSEMenuFramework {
 
+namespace SKSEMenuFramework {
     inline bool IsInstalled() {
         constexpr auto dllPath = "Data/SKSE/Plugins/SKSEMenuFramework.dll";
         return std::filesystem::exists(dllPath);
@@ -2249,7 +2249,7 @@ typedef enum {
                                        ImGuiInputFlags_RepeatUntilKeyModsChangeFromNone |
                                        ImGuiInputFlags_RepeatUntilOtherKeyPress,
     ImGuiInputFlags_RepeatMask_ =
-        ImGuiInputFlags_Repeat | ImGuiInputFlags_RepeatRateMask_ | ImGuiInputFlags_RepeatUntilMask_,
+        static_cast<int>(ImGuiInputFlags_Repeat) | static_cast<int>(ImGuiInputFlags_RepeatRateMask_) | static_cast<int>(ImGuiInputFlags_RepeatUntilMask_),
     ImGuiInputFlags_CondMask_ = ImGuiInputFlags_CondHovered | ImGuiInputFlags_CondActive,
     ImGuiInputFlags_RouteTypeMask_ = ImGuiInputFlags_RouteActive | ImGuiInputFlags_RouteFocused |
                                      ImGuiInputFlags_RouteGlobal | ImGuiInputFlags_RouteAlways,
@@ -2429,11 +2429,11 @@ typedef enum {
                                    ImGuiDockNodeFlags_NoDockingSplitOther,
     ImGuiDockNodeFlags_SharedFlagsInheritMask_ = ~0,
     ImGuiDockNodeFlags_NoResizeFlagsMask_ =
-        ImGuiDockNodeFlags_NoResize | ImGuiDockNodeFlags_NoResizeX | ImGuiDockNodeFlags_NoResizeY,
+        static_cast<int>(ImGuiDockNodeFlags_NoResize) | static_cast<int>(ImGuiDockNodeFlags_NoResizeX) | static_cast<int>(ImGuiDockNodeFlags_NoResizeY),
     ImGuiDockNodeFlags_LocalFlagsTransferMask_ =
-        ImGuiDockNodeFlags_NoDockingSplit | ImGuiDockNodeFlags_NoResizeFlagsMask_ | ImGuiDockNodeFlags_AutoHideTabBar |
-        ImGuiDockNodeFlags_CentralNode | ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_HiddenTabBar |
-        ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton,
+        static_cast<int>(ImGuiDockNodeFlags_NoDockingSplit) | static_cast<int>(ImGuiDockNodeFlags_NoResizeFlagsMask_) | static_cast<int>(ImGuiDockNodeFlags_AutoHideTabBar) |
+        static_cast<int>(ImGuiDockNodeFlags_CentralNode) | static_cast<int>(ImGuiDockNodeFlags_NoTabBar) | static_cast<int>(ImGuiDockNodeFlags_HiddenTabBar) |
+        static_cast<int>(ImGuiDockNodeFlags_NoWindowMenuButton) | static_cast<int>(ImGuiDockNodeFlags_NoCloseButton),
     ImGuiDockNodeFlags_SavedFlagsMask_ = ImGuiDockNodeFlags_NoResizeFlagsMask_ | ImGuiDockNodeFlags_DockSpace |
                                          ImGuiDockNodeFlags_CentralNode | ImGuiDockNodeFlags_NoTabBar |
                                          ImGuiDockNodeFlags_HiddenTabBar | ImGuiDockNodeFlags_NoWindowMenuButton |
